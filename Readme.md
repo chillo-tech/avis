@@ -25,3 +25,8 @@ File > open ... > selectionner le repertoire
 ```
 
 
+## Switcher vers la branche
+```shell
+git checkout incription
+```
+
