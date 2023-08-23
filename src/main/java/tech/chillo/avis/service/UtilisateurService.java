@@ -1,6 +1,10 @@
 package tech.chillo.avis.service;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tech.chillo.avis.TypeDeRole;
@@ -15,7 +19,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UtilisateurService {
+public class UtilisateurService implements UserDetailsService {
     private UtilisateurRepository utilisateurRepository;
     private BCryptPasswordEncoder passwordEncoder;
     private ValidationService validationService;
@@ -51,5 +55,12 @@ public class UtilisateurService {
         Utilisateur utilisateurActiver = this.utilisateurRepository.findById(validation.getUtilisateur().getId()).orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
         utilisateurActiver.setActif(true);
         this.utilisateurRepository.save(utilisateurActiver);
+    }
+
+    @Override
+    public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.utilisateurRepository
+                .findByEmail(username)
+                .orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à cet identifiant"));
     }
 }
