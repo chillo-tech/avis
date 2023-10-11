@@ -6,7 +6,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tech.chillo.avis.entite.Jwt;
 import tech.chillo.avis.entite.Utilisateur;
 import tech.chillo.avis.repository.JwtRepository;
@@ -14,9 +16,11 @@ import tech.chillo.avis.service.UtilisateurService;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
+import java.util.stream.Collectors;
+@Transactional
 @AllArgsConstructor
 @Service
 public class JwtService {
@@ -34,6 +38,7 @@ public class JwtService {
     }
     public Map<String, String> generate(String username) {
         Utilisateur utilisateur = this.utilisateurService.loadUserByUsername(username);
+        this.disableTokens(utilisateur);
         final Map<String, String> jwtMap = this.generateJwt(utilisateur);
 
         final Jwt jwt = Jwt
@@ -45,6 +50,17 @@ public class JwtService {
                 .build();
         this.jwtRepository.save(jwt);
         return jwtMap;
+    }
+
+    private void disableTokens(Utilisateur utilisateur) {
+        final List<Jwt> jwtList = this.jwtRepository.findUtilisateur(utilisateur.getEmail()).peek(
+                jwt -> {
+                    jwt.setDesactive(true);
+                    jwt.setExpire(true);
+                }
+        ).collect(Collectors.toList());
+
+        this.jwtRepository.saveAll(jwtList);
     }
 
     public String extractUsername(String token) {
@@ -98,4 +114,15 @@ public class JwtService {
         return Keys.hmacShaKeyFor(decoder);
     }
 
+    public void deconnexion() {
+       Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       Jwt jwt = this.jwtRepository.findUtilisateurValidToken(
+               utilisateur.getEmail(),
+               false,
+               false
+       ).orElseThrow(() -> new RuntimeException("Token invalide"));
+        jwt.setExpire(true);
+        jwt.setDesactive(true);
+       this.jwtRepository.save(jwt);
+    }
 }
