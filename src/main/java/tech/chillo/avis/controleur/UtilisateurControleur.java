@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tech.chillo.avis.dto.AuthentificationDTO;
 import tech.chillo.avis.entite.Utilisateur;
@@ -38,6 +39,7 @@ public class UtilisateurControleur {
         this.utilisateurService.activation(activation);
     }
 
+<<<<<<< HEAD
 
     @PostMapping(path = "modifier-mot-de-passe")
     public void modifierMotDePasse(@RequestBody Map<String, String> activation) {
@@ -51,6 +53,18 @@ public class UtilisateurControleur {
 
 
 
+=======
+    @PostMapping(path = "refresh-token")
+    public @ResponseBody Map<String, String> refreshToken(@RequestBody Map<String, String> refreshTokenRequest) {
+        return this.jwtService.refreshToken(refreshTokenRequest);
+    }
+
+    @PostMapping(path = "deconnexion")
+    public void deconnexion() {
+        this.jwtService.deconnexion();
+    }
+
+>>>>>>> feature/deconnexion
     @PostMapping(path = "connexion")
     public Map<String, String> connexion(@RequestBody AuthentificationDTO authentificationDTO) {
         final Authentication authenticate = authenticationManager.authenticate(
