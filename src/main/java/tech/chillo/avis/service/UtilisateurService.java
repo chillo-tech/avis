@@ -63,4 +63,19 @@ public class UtilisateurService implements UserDetailsService {
                 .findByEmail(username)
                 .orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à cet identifiant"));
     }
+
+    public void modifierMotDePasse(Map<String, String> parametres) {
+        Utilisateur utilisateur = this.loadUserByUsername(parametres.get("email"));
+        this.validationService.enregistrer(utilisateur);
+    }
+
+    public void nouveauMotDePasse(Map<String, String> parametres) {
+        Utilisateur utilisateur = this.loadUserByUsername(parametres.get("email"));
+        final Validation validation = validationService.lireEnFonctionDuCode(parametres.get("code"));
+        if(validation.getUtilisateur().getEmail().equals(utilisateur.getEmail())) {
+            String mdpCrypte = this.passwordEncoder.encode(parametres.get("password"));
+            utilisateur.setMdp(mdpCrypte);
+            this.utilisateurRepository.save(utilisateur);
+        }
+    }
 }

@@ -38,6 +38,19 @@ public class UtilisateurControleur {
         this.utilisateurService.activation(activation);
     }
 
+
+    @PostMapping(path = "modifier-mot-de-passe")
+    public void modifierMotDePasse(@RequestBody Map<String, String> activation) {
+        this.utilisateurService.modifierMotDePasse(activation);
+    }
+
+    @PostMapping(path = "nouveau-mot-de-passe")
+    public void nouveauMotDePasse(@RequestBody Map<String, String> activation) {
+        this.utilisateurService.nouveauMotDePasse(activation);
+    }
+
+
+
     @PostMapping(path = "connexion")
     public Map<String, String> connexion(@RequestBody AuthentificationDTO authentificationDTO) {
         final Authentication authenticate = authenticationManager.authenticate(

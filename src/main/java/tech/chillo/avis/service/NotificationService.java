@@ -17,7 +17,7 @@ public class NotificationService {
         message.setSubject("Votre code d'activation");
 
         String texte = String.format(
-                "Bonjour %s, <br /> Votre code d'action est %s; A bientôt",
+                "Bonjour %s, <br /> Votre code d'activation est %s; A bientôt",
                 validation.getUtilisateur().getNom(),
                 validation.getCode()
                 );
