@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
@@ -40,6 +41,7 @@ public class ConfigurationSecuriteApplication{
                                                 .requestMatchers(POST,"/inscription").permitAll()
                                                 .requestMatchers(POST,"/activation").permitAll()
                                                 .requestMatchers(POST,"/connexion").permitAll()
+                                                .requestMatchers(GET, "/avis").hasAuthority("ROLE_ADMINISTRATEUR")
                                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(httpSecuritySessionManagementConfigurer ->

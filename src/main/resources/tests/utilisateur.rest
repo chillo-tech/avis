@@ -1,0 +1,28 @@
+### Inscription
+POST http://localhost:9191/api/inscription
+Content-Type: application/json
+
+{
+  "email": "accueil@chille.tech",
+  "mdp": "accueil",
+  "nom": "Accueil"
+}
+
+### connexion
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "accueil@chille.tech",
+  "password": "accueil"
+}
+
+### Inscription
+POST http://localhost:9191/api/activation
+Content-Type: application/json
+
+{
+  "email": "accueil@chille.tech",
+  "code": "644913"
+}
+

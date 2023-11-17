@@ -1,0 +1,20 @@
+POST http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJBY2N1ZWlsIiwic3ViIjoiYWNjdWVpbEBjaGlsbGUudGVjaCIsImV4cCI6MTcwMDIwMDc2M30.IzH-8_GppNK3jGdMNhwZdnPgsRAB5QxhnbXnKywcwmM
+
+{
+  "message": "Belle formation"
+}
+
+###
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDAxOTgzNzcsInN1YiI6ImFjY3VlaWxAY2hpbGxlLnRlY2giLCJub20iOiJBY2N1ZWlsIn0.r5q3lgVoZsivLRhmwMkHbHSVxFZOGSl3oTu98M2DeKs
+
+###
+// Admin avis
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJhZG1pbiIsInN1YiI6ImFkbWluQGNoaWxsby50ZWNoIiwiZXhwIjoxNzAwMjAwNjEyfQ.-CSAyh0uYIFSCplc6WAicCA3ey_w_zNcJ7WUFxDtBm0
+
+###
