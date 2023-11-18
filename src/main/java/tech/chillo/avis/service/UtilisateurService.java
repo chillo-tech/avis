@@ -1,19 +1,19 @@
 package tech.chillo.avis.service;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import tech.chillo.avis.TypeDeRole;
+import tech.chillo.avis.enums.TypeDeRole;
 import tech.chillo.avis.entite.Role;
 import tech.chillo.avis.entite.Utilisateur;
 import tech.chillo.avis.entite.Validation;
 import tech.chillo.avis.repository.UtilisateurRepository;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -62,5 +62,14 @@ public class UtilisateurService implements UserDetailsService {
         return this.utilisateurRepository
                 .findByEmail(username)
                 .orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à cet identifiant"));
+    }
+
+    public List<Utilisateur> liste() {
+        final Iterable<Utilisateur> utilisateurIterable = this.utilisateurRepository.findAll();
+        List<Utilisateur>  utilisateurs = new ArrayList();
+        for (Utilisateur utilisateur : utilisateurIterable) {
+            utilisateurs.add(utilisateur);
+        }
+        return utilisateurs;
     }
 }

@@ -1,0 +1,26 @@
+###
+POST http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJBY2N1ZWlsIiwic3ViIjoiYWNjdWVpbEBjaGlsbG8udGVjaCIsImV4cCI6MTcwMDI0NjQyNX0.bcMz_Tk253QalB53PrMW3K8HR50sAWLE-WerM998k-c
+
+{
+  "message": "Belle formation spring security"
+}
+
+###
+// User
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJBY2N1ZWlsIiwic3ViIjoiYWNjdWVpbEBjaGlsbG8udGVjaCIsImV4cCI6MTcwMDI0NjQyNX0.bcMz_Tk253QalB53PrMW3K8HR50sAWLE-WerM998k-c
+
+###
+/// Admin
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJhZG1pbiIsInN1YiI6ImFjaGlsbGUubWJvdWd1ZW5nQGNoaWxsby50ZWNoIiwiZXhwIjoxNzAwMjQ3NzY4fQ.hnLdSllMrbXrHJM4VRmmCh4OZJnzW1Os8quQF7i65Rw
+
+###
+// Manager
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDAyNDgxNTMsInN1YiI6Im1hbmFnZXJAY2hpbGxvLnRlY2giLCJub20iOiJtYW5hZ2VyIn0.ZGYCh2tLS2ahPMxATKxQPf3BiCzxGab7ux4Lp0PD6d8

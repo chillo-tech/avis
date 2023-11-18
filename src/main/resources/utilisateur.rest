@@ -1,0 +1,62 @@
+###
+// Inscription
+POST http://localhost:9191/api/inscription
+Content-Type: application/json
+
+{
+  "email": "accueil@chillo.tech",
+  "mdp": "accueil",
+  "nom": "Accueil"
+}
+
+###
+POST http://localhost:9191/api/activation
+Content-Type: application/json
+
+{
+  "email": "accueil@chillo.tech",
+  "code": "876756"
+}
+
+###
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "accueil@chillo.tech",
+  "password": "accueil"
+}
+
+###
+// Login admin
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "achille.mbougueng@chillo.tech",
+  "password": "admin"
+}
+
+
+###
+// Login manager
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "manager@chillo.tech",
+  "password": "manager"
+}
+
+###
+
+###
+/// Admin
+GET http://localhost:9191/api/utilisateur
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDAyODg4OTQsInN1YiI6ImFjaGlsbGUubWJvdWd1ZW5nQGNoaWxsby50ZWNoIiwibm9tIjoiYWRtaW4ifQ.9C-uzYsYFC8NT5jcdbcui_y-4z10z4jEm0uvM5yIvLU"
+###
+// Manager
+GET http://localhost:9191/api/utilisateur
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDAyNDgxNTMsInN1YiI6Im1hbmFnZXJAY2hpbGxvLnRlY2giLCJub20iOiJtYW5hZ2VyIn0.ZGYCh2tLS2ahPMxATKxQPf3BiCzxGab7ux4Lp0PD6d8
