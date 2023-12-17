@@ -1,0 +1,8 @@
+POST http://localhost:9191/api/activation
+Content-Type: application/json
+
+{
+  "code": 730642
+}
+
+###

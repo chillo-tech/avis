@@ -1,0 +1,16 @@
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "achille.mbougueng@chillo.tech",
+  "password": "achille"
+}
+
+###
+POST http://localhost:9191/api/connexion
+Content-Type: application/json
+
+{
+  "username": "admin@chillo.tech",
+  "password": "admin"
+}

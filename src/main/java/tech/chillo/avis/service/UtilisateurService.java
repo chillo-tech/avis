@@ -1,8 +1,6 @@
 package tech.chillo.avis.service;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,42 +23,49 @@ public class UtilisateurService implements UserDetailsService {
     private ValidationService validationService;
     public void inscription(Utilisateur utilisateur) {
 
-        if(!utilisateur.getEmail().contains("@")) {
-            throw  new RuntimeException("Votre mail invalide");
+        if (!utilisateur.getEmail().contains("@")) {
+            throw new RuntimeException("Votre mail invalide");
         }
-        if(!utilisateur.getEmail().contains(".")) {
-            throw  new RuntimeException("Votre mail invalide");
+        if (!utilisateur.getEmail().contains(".")) {
+            throw new RuntimeException("Votre mail invalide");
         }
 
-        Optional<Utilisateur> utilisateurOptional = this.utilisateurRepository.findByEmail(utilisateur.getEmail());
-        if(utilisateurOptional.isPresent()) {
-            throw  new RuntimeException("Votre mail est déjà utilisé");
+        final Optional<Utilisateur> utilisateurOptional = this.utilisateurRepository.findByEmail(utilisateur.getEmail());
+        if (utilisateurOptional.isPresent()) {
+            throw new RuntimeException("Votre mail est déjà utilisé");
         }
-        String mdpCrypte = this.passwordEncoder.encode(utilisateur.getMdp());
+        final String mdpCrypte = this.passwordEncoder.encode(utilisateur.getMdp());
         utilisateur.setMdp(mdpCrypte);
 
-        Role roleUtilisateur = new Role();
+        final Role roleUtilisateur = new Role();
         roleUtilisateur.setLibelle(TypeDeRole.UTILISATEUR);
+        if (utilisateur.getRole() != null && utilisateur.getRole().getLibelle().equals(TypeDeRole.ADMINISTRATEUR)) {
+            roleUtilisateur.setLibelle(TypeDeRole.ADMINISTRATEUR);
+            utilisateur.setActif(true);
+        }
         utilisateur.setRole(roleUtilisateur);
 
         utilisateur = this.utilisateurRepository.save(utilisateur);
-        this.validationService.enregistrer(utilisateur);
+
+        if (roleUtilisateur.getLibelle().equals(TypeDeRole.UTILISATEUR)) {
+            this.validationService.enregistrer(utilisateur);
+        }
     }
 
-    public void activation(Map<String, String> activation) {
-        Validation validation = this.validationService.lireEnFonctionDuCode(activation.get("code"));
-        if(Instant.now().isAfter(validation.getExpiration())){
-            throw  new RuntimeException("Votre code a expiré");
+    public void activation(final Map<String, String> activation) {
+        final Validation validation = this.validationService.lireEnFonctionDuCode(activation.get("code"));
+        if (Instant.now().isAfter(validation.getExpiration())) {
+            throw new RuntimeException("Votre code a expiré");
         }
-        Utilisateur utilisateurActiver = this.utilisateurRepository.findById(validation.getUtilisateur().getId()).orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
+        final Utilisateur utilisateurActiver = this.utilisateurRepository.findById(validation.getUtilisateur().getId()).orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
         utilisateurActiver.setActif(true);
         this.utilisateurRepository.save(utilisateurActiver);
     }
 
     @Override
-    public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
+    public Utilisateur loadUserByUsername(final String username) throws UsernameNotFoundException {
         return this.utilisateurRepository
                 .findByEmail(username)
-                .orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à cet identifiant"));
+                .orElseThrow(() -> new UsernameNotFoundException("Aucun utilisateur ne corespond à cet identifiant"));
     }
 }

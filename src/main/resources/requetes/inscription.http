@@ -1,0 +1,22 @@
+###
+POST http://localhost:9191/api/inscription
+Content-Type: application/json
+
+{
+  "nom": "Achille MBOUGUENG",
+  "email": "achille.mbougueng@chillo.tech",
+  "mdp": "achille"
+}
+
+###
+POST http://localhost:9191/api/inscription
+Content-Type: application/json
+
+{
+  "nom": "admin",
+  "email": "admin@chillo.tech",
+  "mdp": "admin",
+  "role": {
+    "libelle": "ADMINISTRATEUR"
+  }
+}

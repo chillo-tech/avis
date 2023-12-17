@@ -1,0 +1,22 @@
+POST http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer JhbGciOiJIUzI1NiJ9.eyJub20iOiJBY2hpbGxlIE1CT1VHVUVORyIsInN1YiI6ImFjaGlsbGUubWJvdWd1ZW5nQGNoaWxsby50ZWNoIiwiZXhwIjoxNzAyMDIzODQ1fQ.eZ76rtYcQ6PGy48G5rsamkI_-SgkFLHzCMtX69kDhbs"
+
+
+{
+  "message": "Merci pour le tuto :)"
+}
+
+###
+// Avis en administrateur
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBjaGlsbG8udGVjaCIsIm5vbSI6ImFkbWluIiwiZXhwIjoxNzAyMDI1MzExfQ.FPDOQ_GAvfUxTN6_kr52dknMIIQJ60TuJUHYWBbcxHw
+
+###
+// Avis en utlisateur
+GET http://localhost:9191/api/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2hpbGxlLm1ib3VndWVuZ0BjaGlsbG8udGVjaCIsIm5vbSI6IkFjaGlsbGUgTUJPVUdVRU5HIiwiZXhwIjoxNzAyMDI1MzkzfQ.DpJOx1tGIX3QOhw0rUgJR6nT3q8bcn6K-KNft5gD1QM
+
+###
