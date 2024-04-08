@@ -6,14 +6,12 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: example
-    ports:
-    - 3308:3306
   adminer:
     container_name: adminer-4.8.0-standalone
     image: adminer:4.8.0-standalone
     restart: always
     ports:
-    - 9080:8080
+    - 8080:8080
   smtp4dev:
     image: rnwood/smtp4dev:v3
     restart: always
