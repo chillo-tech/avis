@@ -11,7 +11,7 @@ services:
     image: adminer:4.8.0-standalone
     restart: always
     ports:
-    - 8080:8080
+    - 9080:8080
   smtp4dev:
     image: rnwood/smtp4dev:v3
     restart: always
