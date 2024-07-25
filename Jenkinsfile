@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        DOCKER_HOST = 'tcp://dind:2375'
+        DOCKER_HOST = 'tcp://jenkins-dind:2375'
     }
     stages {
         stage('Checkout') {
