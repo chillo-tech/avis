@@ -1,15 +1,17 @@
+#!groovy
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.7-openjdk-18'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'docker --version'
-            }
-        }
-    }
-}
+    agent none
+   stages {     
+    stage('Maven Install') {
+      agent {         
+       docker {          
+         image 'maven:3.5.0'         
+     }       
+  }       
+  steps {
+       sh "docker ps -a"
+       sh "mvn clean install -Dmaven.test.skip=true"
+       }
+     }
+   }
+ }
